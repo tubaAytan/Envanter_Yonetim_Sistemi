@@ -12,4 +12,10 @@ public class PerishableProduct extends Product {
     public void setExpiryDate(String expiryDate){
         this.expiryDate = expiryDate;
     }
+
+    @Override
+    public void displayInfo(){
+        super.displayInfo();
+        System.out.println("Son Kullanma Tarihi: " + expiryDate);
+    }
 }
