@@ -5,4 +5,11 @@ public class PerishableProduct extends Product {
         super(id, name, price, quantity);
         this.expiryDate = expiryDate;
     }
+
+    public String getExpiryDate(){
+        return expiryDate;
+    }
+    public void setExpiryDate(String expiryDate){
+        this.expiryDate = expiryDate;
+    }
 }
