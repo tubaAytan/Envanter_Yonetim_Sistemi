@@ -1,4 +1,4 @@
-public class Storable {
+public interface Storable {
     void updateStock(int amount);
     boolean isInStock();
 }

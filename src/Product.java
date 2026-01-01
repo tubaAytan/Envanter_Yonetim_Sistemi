@@ -44,4 +44,9 @@ public class Product implements Storable {
         this.quantity += amount;
         System.out.println("Stok güncellendi. Yeni miktar: " + this.quantity);
     }
+
+    @Override
+    public boolean isInStock(){
+        return this.quantity > 0;
+    }
 }
