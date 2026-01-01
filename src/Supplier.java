@@ -22,4 +22,7 @@ public class Supplier {
         this.contactInfo = contactInfo;
     }
 
+    public void displaySupplierInfo(){
+        System.out.println("Tedarikçi: " + supplierName + " İletişim: " + contactInfo);
+    }
 }
