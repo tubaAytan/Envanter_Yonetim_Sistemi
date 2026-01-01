@@ -1,4 +1,4 @@
-public class Product {
+public class Product implements Storable {
     private String id;
     private String name;
     private double price;
@@ -38,5 +38,10 @@ public class Product {
 
     public void displayInfo(){
         System.out.println("ID: " + id + " İsim: " + name + " Fiyat: " + price + " Stok: " + quantity);
+    }
+    @Override
+    public void updateStock(int amount){
+        this.quantity += amount;
+        System.out.println("Stok güncellendi. Yeni miktar: " + this.quantity);
     }
 }
