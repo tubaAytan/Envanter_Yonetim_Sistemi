@@ -7,4 +7,9 @@ public class Inventory {
     public Inventory(){
         this.products = new ArrayList<>();
     }
+
+    public void addProduct(Product product){
+        products.add(product);
+        System.out.println(product.getName() + " envantere başarıyla eklendi.");
+    }
 }
