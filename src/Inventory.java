@@ -25,4 +25,17 @@ public class Inventory {
             }
         }
     }
+
+    public void saveToFile(){
+        String fileName = "inventory.csv";
+        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
+        for(Product p: products){
+            writer.println(p.getId() + "," + p.getName() + "," + p.getQuantity());
+        }
+        System.out.println("Başarılı: Envanter '"+ fileName + "' dosyasına kaydedildi.");
+        }
+        catch(IOException e){
+        System.out.println("Hata: Dosya yazılırken bir sorun oluştu: " + e.getMessage());
+        }
+    }
 }
