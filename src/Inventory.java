@@ -40,4 +40,29 @@ public class Inventory {
         System.out.println("Hata: Dosya yazılırken bir sorun oluştu: " + e.getMessage());
         }
     }
+
+    public void loadFromFile(){
+        String fileName = "inventory.csv";
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
+            String line;
+            while((line = reader.readLine()) != null){
+                String[] data = line.split(",");
+                if(data.length == 4){
+                    String id = data[0];
+                    String name = data[1];
+                    double price = Double.parseDouble(data[2]);
+                    int quantity = Integer.parseInt(data[3]);
+
+                    Product p = new Product(id, name, price, quantity);
+                    products.add(p);
+                }
+            }
+            System.out.println("Başarılı: Veriler dosyadan yüklendi.");
+        }
+        catch(IOException e){
+            System.out.println("Bilgi: Henüz bir kayıt dosyası bulunamadı, yeni liste ile başlanıyor.");
+        }
+    }
 }
+
