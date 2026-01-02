@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class Inventory {
     private List<Product> products;
