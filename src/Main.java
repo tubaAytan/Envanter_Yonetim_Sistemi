@@ -40,8 +40,10 @@ public class Main {
                     String name = scanner.nextLine();
                     System.out.print("Fiyat: ");
                     double price = scanner.nextDouble();
+                    scanner.nextLine();
                     System.out.print("Miktar: ");
                     int qty = scanner.nextInt();
+                    scanner.nextLine();
 
                     inventory.addProduct(new Product(id, name, price, qty));
                     } catch (Exception e) {

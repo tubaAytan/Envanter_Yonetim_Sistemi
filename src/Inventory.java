@@ -44,16 +44,20 @@ public class Inventory {
 
     public void loadFromFile(){
         String fileName = "inventory.csv";
+        products.clear();
 
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
             String line;
             while((line = reader.readLine()) != null){
+                if(line.trim().isEmpty()) continue;
+
                 String[] data = line.split(",");
+
                 if(data.length == 4){
-                    String id = data[0];
-                    String name = data[1];
-                    double price = Double.parseDouble(data[2]);
-                    int quantity = Integer.parseInt(data[3]);
+                    String id = data[0].trim();
+                    String name = data[1].trim();
+                    double price = Double.parseDouble(data[2].trim());
+                    int quantity = Integer.parseInt(data[3].trim());
 
                     Product p = new Product(id, name, price, quantity);
                     products.add(p);
