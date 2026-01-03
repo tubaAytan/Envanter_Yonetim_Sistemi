@@ -100,5 +100,19 @@ public class Inventory {
             System.out.println("Aranan kriterlere uygun ürün bulunamadı.");
         }
     }
+
+    public void checkLowStock(int threshold){
+        System.out.println("\n~~Stok Seviyesi "+ threshold + " Altında Olan Ürünler~~");
+        boolean alert = false;
+
+        for(Product p: products){
+            if(p.getQuantity()<threshold){
+                System.out.println("UYARI: "+p.getName()+" ~ Kalan Stok: "+p.getQuantity());
+            }
+        }
+        if(!alert){
+            System.out.println("Tüm ürünlerin stok seviyesi güvenli sınırda.");
+        }
+    }
 }
 
