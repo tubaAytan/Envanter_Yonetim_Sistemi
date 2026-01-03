@@ -17,9 +17,16 @@ public class Main {
             System.out.println("0. Çıkış");
             System.out.print("Seçimiz: ");
 
-            choice = scanner.nextInt();
-            scanner.nextLine();
-
+            try{
+                choice =scanner.nextInt();
+                scanner.nextLine();
+            }
+            catch(Exception e){
+                System.out.println("HATA: Lütfen sadece sayı giriniz!");
+                scanner.nextLine();
+                choice = -1;
+                continue;
+            }
             switch(choice){
                 case 1:
                     inventory.listProducts();
