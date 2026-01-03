@@ -26,10 +26,33 @@ public class Main {
                 case 2:
                     System.out.println("ID: ");
                     String id = scanner.nextLine();
-                    System.out.println("");
-                    System.out.println("");
-                    System.out.println("");
+                    System.out.println("İsim: ");
+                    String name = scanner.nextLine();
+                    System.out.println("Fiyat: ");
+                    double price = scanner.nextDouble();
+                    System.out.println("Miktar: ");
+                    int qty = scanner.nextInt();
+                    inventory.addProduct(new Product(id, name, price, qty));
+                    break;
+                case 3:
+                    System.out.print("Silinecek Ürün ID: ");
+                    String deleteId = scanner.nextLine();
+                    inventory.removeProduct(deleteId);
+                    break;
+                case 4:
+                    System.out.print("Aranacak Ürün (İsim ile): ");
+                    String searchName = scanner.nextLine();
+                    inventory.searchProductByName(searchName);
+                    break;
+                case 5:
+                    inventory.checkLowStock(5);
+                case 0:
+                    System.out.println("Sistemden Çıkılıyor...");
+                    break;
+                default:
+                    System.out.println("Geçersiz Seçim!");
             }
         }
+        scanner.close();
     }
 }
