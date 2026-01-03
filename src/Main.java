@@ -33,6 +33,7 @@ public class Main {
                     inventory.listProducts();
                     break;
                 case 2:
+                    try{
                     System.out.print("ID: ");
                     String id = scanner.nextLine();
                     System.out.print("İsim: ");
@@ -43,6 +44,10 @@ public class Main {
                     int qty = scanner.nextInt();
 
                     inventory.addProduct(new Product(id, name, price, qty));
+                    } catch (Exception e) {
+                        System.out.println("HATA: Hatalı veri tipi girdiniz! Ürün ekleme iptal edildi.");
+                        scanner.nextLine();
+                    }
                     break;
                 case 3:
                     System.out.print("Silinecek Ürün ID: ");
