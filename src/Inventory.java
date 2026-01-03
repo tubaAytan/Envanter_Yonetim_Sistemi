@@ -85,5 +85,12 @@ public class Inventory {
             saveToFile();
         }
     }
+
+    public void searchProductByName(String searchTerm){
+        System.out.println("\n~~~~ '" + searchTerm + "' için Arama Sonuçları ~~~~");
+        boolean found = false;
+
+
+    }
 }
 
