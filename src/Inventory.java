@@ -14,8 +14,9 @@ public class Inventory {
     }
     public void addProduct(Product product){
         products.add(product);
-        System.out.println(product.getName() + " envantere başarıyla eklendi.");
         saveToFile();
+        System.out.println(product.getName() + " envantere başarıyla eklendi.");
+
     }
     public void listProducts(){
         if(products.isEmpty()){
@@ -31,7 +32,7 @@ public class Inventory {
 
     public void saveToFile(){
         String fileName = "inventory.csv";
-        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
+        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName, false))){
         for(Product p: products){
             writer.println(p.getId() + "," + p.getName() + "," + p.getQuantity());
         }
