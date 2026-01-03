@@ -15,7 +15,7 @@ public class Main {
             System.out.println("4. Ürün Ara (İsim ile)");
             System.out.println("5. Az Stok Uyarılarını Gör");
             System.out.println("0. Çıkış");
-            System.out.println("Seçimiz: ");
+            System.out.print("Seçimiz: ");
 
             choice = scanner.nextInt();
             scanner.nextLine();
@@ -23,15 +23,17 @@ public class Main {
             switch(choice){
                 case 1:
                     inventory.listProducts();
+                    break;
                 case 2:
-                    System.out.println("ID: ");
+                    System.out.print("ID: ");
                     String id = scanner.nextLine();
-                    System.out.println("İsim: ");
+                    System.out.print("İsim: ");
                     String name = scanner.nextLine();
-                    System.out.println("Fiyat: ");
+                    System.out.print("Fiyat: ");
                     double price = scanner.nextDouble();
-                    System.out.println("Miktar: ");
+                    System.out.print("Miktar: ");
                     int qty = scanner.nextInt();
+
                     inventory.addProduct(new Product(id, name, price, qty));
                     break;
                 case 3:
@@ -46,6 +48,7 @@ public class Main {
                     break;
                 case 5:
                     inventory.checkLowStock(5);
+                    break;
                 case 0:
                     System.out.println("Sistemden Çıkılıyor...");
                     break;
