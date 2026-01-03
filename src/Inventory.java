@@ -64,5 +64,18 @@ public class Inventory {
             System.out.println("Bilgi: Henüz bir kayıt dosyası bulunamadı, yeni liste ile başlanıyor.");
         }
     }
+
+    public void removeProduct(String id){
+        boolean found = false;
+
+        for(int i = 0; i < products.size(); i++){
+            if(products.get(i).getId().equals(id)){
+                System.out.println(products.get(i).getName() + " envanterden siliniyor...");
+                products.remove(i);
+                found = true;
+                break;
+            }
+        }
+    }
 }
 
