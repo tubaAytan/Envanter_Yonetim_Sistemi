@@ -15,7 +15,7 @@ public class Main {
             System.out.println("4. Ürün Ara (İsim ile)");
             System.out.println("5. Az Stok Uyarılarını Gör");
             System.out.println("0. Çıkış");
-            System.out.print("Seçimiz: ");
+            System.out.print("Seçiminiz: ");
 
             try{
                 choice =scanner.nextInt();
@@ -27,6 +27,7 @@ public class Main {
                 choice = -1;
                 continue;
             }
+            System.out.println("-----------------------------------------------");
             switch(choice){
                 case 1:
                     inventory.listProducts();
