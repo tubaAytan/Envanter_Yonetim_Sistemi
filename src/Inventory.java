@@ -76,6 +76,13 @@ public class Inventory {
                 break;
             }
         }
+
+        if(!found){
+            System.out.println("Hata: "+ id + " ID'li ürün bulunamadı.");
+        }
+        else{
+            saveToFile();
+        }
     }
 }
 
