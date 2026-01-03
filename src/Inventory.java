@@ -90,7 +90,15 @@ public class Inventory {
         System.out.println("\n~~~~ '" + searchTerm + "' için Arama Sonuçları ~~~~");
         boolean found = false;
 
-
+        for(Product p: products){
+            if(p.getName().toLowerCase().contains(searchTerm.toLowerCase())){
+                p.displayInfo();
+                found = true;
+            }
+        }
+        if(!found){
+            System.out.println("Aranan kriterlere uygun ürün bulunamadı.");
+        }
     }
 }
 
