@@ -15,6 +15,7 @@ public class Inventory {
     public void addProduct(Product product){
         products.add(product);
         System.out.println(product.getName() + " envantere başarıyla eklendi.");
+        saveToFile();
     }
     public void listProducts(){
         if(products.isEmpty()){
