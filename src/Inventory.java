@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+import java.util.Locale;
 public class Inventory {
     private List<Product> products;
 
@@ -32,9 +32,10 @@ public class Inventory {
 
     public void saveToFile(){
         String fileName = "inventory.csv";
-        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName, false))){
+        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
         for(Product p: products){
-            writer.println(p.getId() + "," + p.getName() + "," + p.getQuantity());
+            String line = String.format(Locale.US, "%s,%s,%.2f,%d",p.getId(), p.getName(), p.getPrice(), p.getQuantity());
+            writer.println(line);
         }
         System.out.println("Başarılı: Envanter '"+ fileName + "' dosyasına kaydedildi.");
         }
@@ -60,8 +61,7 @@ public class Inventory {
                     double price = Double.parseDouble(data[2].trim());
                     int quantity = Integer.parseInt(data[3].trim());
 
-                    Product p = new Product(id, name, price, quantity);
-                    products.add(p);
+                    products.add(new Product(id, name, price, quantity));
                 }
             }
             System.out.println("Başarılı: Veriler dosyadan yüklendi.");
