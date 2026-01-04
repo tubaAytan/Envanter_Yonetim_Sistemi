@@ -16,6 +16,6 @@ public class PerishableProduct extends Product {
     @Override
     public void displayInfo(){
         super.displayInfo();
-        System.out.print("Son Kullanma Tarihi: " + expiryDate);
+        System.out.print("| Son Kullanma Tarihi: " + expiryDate);
     }
 }

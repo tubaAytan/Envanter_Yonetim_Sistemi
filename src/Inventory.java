@@ -26,6 +26,7 @@ public class Inventory {
             System.out.println("\n~~~~ Mevcut Envanter Listesi ~~~~");
             for(Product p: products){
                 p.displayInfo();
+                System.out.println();
             }
         }
     }
@@ -34,8 +35,15 @@ public class Inventory {
         String fileName = "inventory.csv";
         try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
         for(Product p: products){
-            String line = String.format(Locale.US, "%s,%s,%.2f,%d",p.getId(), p.getName(), p.getPrice(), p.getQuantity());
-            writer.println(line);
+            if(p instanceof PerishableProduct){
+                PerishableProduct pp = (PerishableProduct) p;
+                String line = String.format(Locale.US, "%s,%s,%.2f,%d,%s",p.getId(), p.getName(), p.getPrice(), p.getQuantity(),pp.getExpiryDate());
+                writer.println(line);
+            }
+            else{
+                String line = String.format(Locale.US, "%s,%s,%.2f,%d",p.getId(), p.getName(), p.getPrice(), p.getQuantity());
+                writer.println(line);
+            }
         }
         System.out.println("Başarılı: Envanter '"+ fileName + "' dosyasına kaydedildi.");
         }
@@ -55,7 +63,16 @@ public class Inventory {
 
                 String[] data = line.split(",");
 
-                if(data.length == 4){
+                if(data.length == 5){
+                    String id = data[0].trim();
+                    String name = data[1].trim();
+                    double price = Double.parseDouble(data[2].trim());
+                    int quantity = Integer.parseInt(data[3].trim());
+                    String expiryDate = data[4].trim();
+
+                    products.add(new PerishableProduct(id, name, price, quantity, expiryDate));
+                }
+                else if(data.length == 4){
                     String id = data[0].trim();
                     String name = data[1].trim();
                     double price = Double.parseDouble(data[2].trim());

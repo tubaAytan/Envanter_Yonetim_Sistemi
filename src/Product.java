@@ -37,7 +37,8 @@ public class Product implements Storable {
     }
 
     public void displayInfo(){
-        System.out.println("ID: " + id + " İsim: " + name + " Fiyat: " + price + " Stok: " + quantity);
+        System.out.print("ID: " + id + " | İsim: " + name + " | Fiyat: " + price + " | Stok: " + quantity+" ");
+
     }
     @Override
     public void updateStock(int amount){
