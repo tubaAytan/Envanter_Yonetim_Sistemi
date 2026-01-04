@@ -35,18 +35,42 @@ public class Main {
                     break;
                 case 2:
                     try{
-                    System.out.print("ID: ");
-                    String id = scanner.nextLine();
-                    System.out.print("İsim: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Fiyat: ");
-                    double price = scanner.nextDouble();
-                    scanner.nextLine();
-                    System.out.print("Miktar: ");
-                    int qty = scanner.nextInt();
-                    scanner.nextLine();
+                    System.out.println("1. Normal Ürün");
+                    System.out.println("2. Bozulabilir ürün");
+                    System.out.print("Seçiminiz: ");
+                    int type = Integer.parseInt(scanner.nextLine());
 
-                    inventory.addProduct(new Product(id, name, price, qty));
+
+
+                    if(type == 2){
+                        System.out.print("ID: ");
+                        String id = scanner.nextLine();
+                        System.out.print("İsim: ");
+                        String name = scanner.nextLine();
+                        System.out.print("Fiyat: ");
+                        double price = scanner.nextDouble();
+                        scanner.nextLine();
+                        System.out.print("Miktar: ");
+                        int qty = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.print("Son Kullanma Tarihi (DD-MM-YYYY): ");
+                        String date = scanner.nextLine();
+                        inventory.addProduct(new PerishableProduct(id, name, price, qty, date));
+                    }
+                    else{
+                        System.out.print("ID: ");
+                        String id = scanner.nextLine();
+                        System.out.print("İsim: ");
+                        String name = scanner.nextLine();
+                        System.out.print("Fiyat: ");
+                        double price = scanner.nextDouble();
+                        scanner.nextLine();
+                        System.out.print("Miktar: ");
+                        int qty = scanner.nextInt();
+                        scanner.nextLine();
+                        inventory.addProduct(new Product(id, name, price, qty));
+                    }
+
                     } catch (Exception e) {
                         System.out.println("HATA: Hatalı veri tipi girdiniz! Ürün ekleme iptal edildi.");
                         scanner.nextLine();
