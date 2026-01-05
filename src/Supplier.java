@@ -1,5 +1,3 @@
-import javax.swing.plaf.synth.SynthDesktopIconUI;
-
 public class Supplier {
     private String supplierName;
     private String contactInfo;

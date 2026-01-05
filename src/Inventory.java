@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Locale;
+
 public class Inventory {
     private List<Product> products;
 
@@ -63,7 +64,7 @@ public class Inventory {
 
                 String[] data = line.split(",");
 
-                if(data.length == 5){
+                if(data.length == 6){
                     String id = data[0].trim();
                     String name = data[1].trim();
                     double price = Double.parseDouble(data[2].trim());
@@ -72,7 +73,7 @@ public class Inventory {
 
                     products.add(new PerishableProduct(id, name, price, quantity, expiryDate));
                 }
-                else if(data.length == 4){
+                else if(data.length == 5){
                     String id = data[0].trim();
                     String name = data[1].trim();
                     double price = Double.parseDouble(data[2].trim());
@@ -135,6 +136,26 @@ public class Inventory {
         if(!alert){
             System.out.println("Tüm ürünlerin stok seviyesi güvenli sınırda.");
         }
+    }
+
+    public void updateProductStock(String id, int amount){
+        for(Product p: products){
+            if(p.getId().equals(id)){
+                p.updateStock(amount);
+                saveToFile();
+                return;
+            }
+        }
+        System.out.println("Hata: Ürün bulunamadı.");
+    }
+
+    public Product getProductById(String id){
+        for(Product p : products){
+            if(p.getId().equals(id)){
+                return p;
+            }
+        }
+        return null;
     }
 }
 
