@@ -135,6 +135,19 @@ public class Main {
                         }
                     }
                     break;
+                case 7:
+                    System.out.println("\n~~~~ Tedarikçi Kaydı ~~~~");
+                    System.out.print("Tedarikçi Adı: ");
+                    String supplierName = scanner.nextLine();
+                    System.out.print("İletişim Bilgisi: ");
+                    String supplierContact = scanner.nextLine();
+
+                    Supplier newSupplier = new Supplier(supplierName, supplierContact);
+                    newSupplier.saveSupplierToFile();
+                    break;
+                case 8:
+                    System.out.println("\n~~~~ Kayıtlı Tedarikçiler ~~~~");
+
                 case 0:
                     System.out.println("Sistemden Çıkılıyor...");
                     break;

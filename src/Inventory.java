@@ -138,17 +138,6 @@ public class Inventory {
         }
     }
 
-    public void updateProductStock(String id, int amount){
-        for(Product p: products){
-            if(p.getId().equals(id)){
-                p.updateStock(amount);
-                saveToFile();
-                return;
-            }
-        }
-        System.out.println("Hata: Ürün bulunamadı.");
-    }
-
     public Product getProductById(String id){
         for(Product p : products){
             if(p.getId().equals(id)){
