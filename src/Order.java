@@ -1,13 +1,13 @@
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+//Ürün sipariş bilgilerini temsil eden ve bu bilgileri kalıcı olarak saklayan sınıftır. Her sipariş nesnesi oluşturulduğunda otomatik olarak o anki zaman damgasını alır.
 public class Order {
     private String orderId;
     private String productName;
     private int quantity;
     private String orderDate;
-
+    // Getter ve Setter metotları için Javadoc genellikle basit tutulur.
     public String getOrderId(){return orderId;}
     public void setOrderId(String orderId) {this.orderId = orderId;}
     public String getProductName(){return productName;}
@@ -25,7 +25,7 @@ public class Order {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         this.orderDate = dtf.format(LocalDateTime.now());
     }
-
+    //Sipariş bilgilerini 'orders.csv' dosyasına ekleme (append) modunda yazar. Bu sayede eski sipariş kayıtları korunur.
     public void saveOrderToFile(){
         try(FileWriter fw = new FileWriter("orders.csv",true); PrintWriter pw = new PrintWriter(fw)){
             pw.println(orderId + "," + productName + "," + quantity + "," + orderDate);
@@ -36,11 +36,11 @@ public class Order {
             System.out.println("Sipariş yazılırken hata oluştu: " + e.getMessage());
         }
     }
-
+    //Siparişin detaylarını konsola tek satırda yazdırır.
     public void displayOrderInfo(){
         System.out.println("Sipariş No: " + orderId + " | Ürün Adı: " + productName + " | Miktar: " + quantity + " | Tarih: " + orderDate);
     }
-
+//'orders.csv' dosyasındaki tüm geçmiş siparişleri okur ve tablolu bir formatta listeler. Dosya yoksa kullanıcıyı bilgilendirir.
     public static void listAllOrders() {
         System.out.println("\n~~~~ Geçmiş Sipariş Kayıtları ~~~~");
         System.out.println(String.format("%-15s | %-15s | %-8s | %-20s", "Sipariş ID", "Ürün Adı", "Miktar", "Tarih"));

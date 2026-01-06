@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Inventory inventory = new Inventory();
-        inventory.loadFromFile();
+        inventory.loadFromFile(); // Önceki verileri yükler
         Scanner scanner = new Scanner(System.in);
         Supplier suppliers = new Supplier();
         suppliers.loadFromFileSupplier();
@@ -11,7 +11,7 @@ public class Main {
         int choice = -1;
 
         while(choice != 0){
-            System.out.println("\n~~~~ ENVANTER YÖNETİM SİSTEMİ ~~~~");
+            System.out.println("\n~~~~ ENVANTER YÖNETİM SİSTEMİ ~~~~"); // Menü listeleme işlemleri...
             System.out.println("1. Tüm Ürünleri Listele");
             System.out.println("2. Yeni Ürün Ekle");
             System.out.println("3. Ürün Sil (ID ile)");
@@ -36,12 +36,12 @@ public class Main {
                 choice = -1;
                 continue;
             }
-            System.out.println("-----------------------------------------------");
+            System.out.println("-----------------------------------------------"); // Kullanıcı seçimine göre işlem başlatılır
             switch(choice){
                 case 1:
                     inventory.listProducts();
                     break;
-                case 2:
+                case 2: //Yeni ürün ekleme süreci: Kullanıcıdan ürün tipi, ID, isim, fiyat ve miktar bilgileri alınır. Veri tipi ve boş giriş kontrolleri burada yapılır.
                     try {
                         int type = 0;
                         try {
@@ -115,7 +115,7 @@ public class Main {
                     String searchName = scanner.nextLine();
                     inventory.searchProductByName(searchName);
                     break;
-                case 5:
+                case 5: // Kritik stok kontrolü ve otomatik sipariş süreci: Belirlenen eşik değerin altındaki ürünleri listeler ve kullanıcı onayıyla toplu sipariş oluşturur.
                     inventory.checkLowStock(5);
                     System.out.print("\nAzalan ürünler için otomatik sipariş oluşturulsun mu? (E/H): ");
                     String oChoice = scanner.nextLine();

@@ -6,23 +6,25 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Locale;
-
+// Envanterdeki ürünleri yöneten, CSV dosyasıyla veri senkronizasyonu sağlayan merkez sınıf
 public class Inventory {
-    private List<Product> products;
-
+    private List<Product> products; // Ürünleri hafızada tutan liste
+    // Constructor: Boş bir ürün listesi başlatır
     public Inventory(){
         this.products = new ArrayList<>();
     }
+    // Listeye yeni ürün ekler; ID kontrolü yapar
     public void addProduct(Product product){
         if(getProductById(product.getId()) != null) {
             System.out.println("HATA: " + product.getId() + " ID'li ürün zaten mevcut! Ekleme reddedildi.");
         }
         else{
             products.add(product);
-            saveToFile();
+            saveToFile(); // Değişikliği anında dosyaya kaydeder
             System.out.println(product.getName() + " envantere başarıyla eklendi.");
         }
     }
+    // Envanterdeki tüm ürünleri konsola listeler
     public void listProducts(){
         if(products.isEmpty()){
             System.out.println("Envanterde ürün bulunmamaktadır.");
@@ -35,7 +37,7 @@ public class Inventory {
             }
         }
     }
-
+    // Listeyi inventory.csv dosyasına yazar; polimorfizm kullanarak ürün tipine göre formatlar
     public void saveToFile(){
         String fileName = "inventory.csv";
         try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
@@ -45,7 +47,7 @@ public class Inventory {
                 String line = String.format(Locale.US, "%s,%s,%.2f,%d,%s",p.getId(), p.getName(), p.getPrice(), p.getQuantity(),pp.getExpiryDate());
                 writer.println(line);
             }
-            else{
+            else{ // Normal ürün formatında yazar
                 String line = String.format(Locale.US, "%s,%s,%.2f,%d",p.getId(), p.getName(), p.getPrice(), p.getQuantity());
                 writer.println(line);
             }
@@ -56,10 +58,10 @@ public class Inventory {
         System.out.println("Hata: Dosya yazılırken bir sorun oluştu: " + e.getMessage());
         }
     }
-
+    // Dosyadan verileri okur; sütun sayısına göre Product veya PerishableProduct oluşturur
     public void loadFromFile(){
         String fileName = "inventory.csv";
-        products.clear();
+        products.clear(); // Mükerrer veri yüklemeyi önlemek için listeyi temizler
 
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
             String line;
@@ -68,7 +70,7 @@ public class Inventory {
 
                 String[] data = line.split(",");
 
-                if(data.length == 5){
+                if(data.length == 5){ // 5 sütun varsa bozulabilir üründür
                     String id = data[0].trim();
                     String name = data[1].trim();
                     double price = Double.parseDouble(data[2].trim());
@@ -77,7 +79,7 @@ public class Inventory {
 
                     products.add(new PerishableProduct(id, name, price, quantity, expiryDate));
                 }
-                else if(data.length == 4){
+                else if(data.length == 4){ // 4 sütun varsa normal üründür
                     String id = data[0].trim();
                     String name = data[1].trim();
                     double price = Double.parseDouble(data[2].trim());
@@ -92,7 +94,7 @@ public class Inventory {
             System.out.println("Bilgi: Henüz bir kayıt dosyası bulunamadı, yeni liste ile başlanıyor.");
         }
     }
-
+    // Belirtilen ID'ye sahip ürünü siler ve dosyayı günceller
     public void removeProduct(String id){
         boolean found = false;
 
@@ -112,7 +114,7 @@ public class Inventory {
             saveToFile();
         }
     }
-
+    // Ürün adı içerisinde arama yapar (Büyük/küçük harf duyarsız)
     public void searchProductByName(String searchTerm){
         System.out.println("\n~~~~ '" + searchTerm + "' için Arama Sonuçları ~~~~");
         boolean found = false;
@@ -127,7 +129,7 @@ public class Inventory {
             System.out.println("Aranan kriterlere uygun ürün bulunamadı.");
         }
     }
-
+    // Stok miktarı belirlenen sınırın altında kalan ürünleri listeler
     public void checkLowStock(int threshold){
         System.out.println("\n~~Stok Seviyesi "+ threshold + " Altında Olan Ürünler~~");
         boolean alert = false;
@@ -142,7 +144,7 @@ public class Inventory {
             System.out.println("Tüm ürünlerin stok seviyesi güvenli sınırda.");
         }
     }
-
+    // Verilen ID'ye sahip ürün nesnesini döndürür
     public Product getProductById(String id){
         for(Product p : products){
             if(p.getId().equals(id)){
@@ -151,7 +153,7 @@ public class Inventory {
         }
         return null;
     }
-
+    // Azalan ürünler için otomatik sipariş oluşturur ve stok ikmali yapar
     public void orderLowStockItems(){
         boolean ordered = false;
         for(Product p : products){
@@ -170,6 +172,7 @@ public class Inventory {
            }
         }
     }
+    // JUnit testlerinin ürün sayısını doğrulaması için kullanılır
     public int getProductCount() {
         return products.size();
     }
