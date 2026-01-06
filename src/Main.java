@@ -5,6 +5,8 @@ public class Main {
         Inventory inventory = new Inventory();
         inventory.loadFromFile();
         Scanner scanner = new Scanner(System.in);
+        Supplier suppliers = new Supplier();
+        suppliers.loadFromFileSupplier();
 
         int choice = -1;
 
@@ -16,6 +18,8 @@ public class Main {
             System.out.println("4. Ürün Ara (İsim ile)");
             System.out.println("5. Az Stok Uyarılarını Gör");
             System.out.println("6. Stok Güncelleme");
+            System.out.println("7. Yeni Tedarikçi Bilgisi Ekle");
+            System.out.println("8. Tüm Tedarikçileri Listele");
             System.out.println("0. Çıkış");
             System.out.print("Seçiminiz: ");
 
@@ -144,9 +148,12 @@ public class Main {
 
                     Supplier newSupplier = new Supplier(supplierName, supplierContact);
                     newSupplier.saveSupplierToFile();
+                    suppliers.loadFromFileSupplier();
                     break;
                 case 8:
-                    System.out.println("\n~~~~ Kayıtlı Tedarikçiler ~~~~");
+                    System.out.println("\n~~~~ Mevcut Tedarikçi Listesi ~~~~");
+                    suppliers.listSuppliers();
+                    break;
 
                 case 0:
                     System.out.println("Sistemden Çıkılıyor...");

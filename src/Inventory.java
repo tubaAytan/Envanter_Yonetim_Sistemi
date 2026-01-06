@@ -34,7 +34,7 @@ public class Inventory {
 
     public void saveToFile(){
         String fileName = "inventory.csv";
-        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
+        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))){
         for(Product p: products){
             if(p instanceof PerishableProduct){
                 PerishableProduct pp = (PerishableProduct) p;
