@@ -171,6 +171,11 @@ public class Main {
                     suppliers.listSuppliers();
                     break;
                 case 9:
+                    System.out.println("\n~~~~ Tedarikçi Silme Paneli ~~~~");
+                    System.out.print("Silmek istediğiniz tedarikçinin tam adını giriniz: ");
+                    String deleteSupplierName = scanner.nextLine();
+                    break;
+                case 10:
                     System.out.println("\n~~~~ Sipariş Paneli ~~~~");
                     System.out.print("Sipariş verilecek ürünün adı: ");
                     String orderProductName = scanner.nextLine();
@@ -199,7 +204,8 @@ public class Main {
                     System.out.println("\nSİPARİŞİNİZ ONAYLANDI");
                     manualOrder.displayOrderInfo();
                     break;
-                case 10:
+
+                case 11:
                     Order.listAllOrders();
                     break;
                 case 0:

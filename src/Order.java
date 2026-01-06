@@ -38,7 +38,7 @@ public class Order {
     }
 
     public void displayOrderInfo(){
-        System.out.print("Sipariş No: " + orderId + " | Ürün Adı: " + productName + " | Miktar: " + quantity + " | Tarih: " + orderDate);
+        System.out.println("Sipariş No: " + orderId + " | Ürün Adı: " + productName + " | Miktar: " + quantity + " | Tarih: " + orderDate);
     }
 
     public static void listAllOrders() {

@@ -77,4 +77,23 @@ public class Supplier {
             }
         }
     }
+
+    public void removeSupplier(String name){
+        boolean removed = suppliers.removeIf(s -> s.getSupplierName().equalsIgnoreCase(name));
+
+        if(removed){
+            try(PrintWriter pw = new PrintWriter((new FileWriter("suppliers.csv", false)))){
+                for(Supplier s : suppliers){
+                    pw.println(s.getSupplierName() + "," + s.getContactInfo());
+                }
+                System.out.println(name + " isimli tedarikçi silindi.");
+            }
+            catch (IOException e){
+                System.out.println("Dosya güncelleme hatası: " + e.getMessage());
+            }
+        }
+        else{
+            System.out.println("HATA: Bu isimde bir tedarikçi bulunamadı.");
+        }
+    }
 }

@@ -34,7 +34,7 @@ public class Inventory {
 
     public void saveToFile(){
         String fileName = "inventory.csv";
-        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))){
+        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
         for(Product p: products){
             if(p instanceof PerishableProduct){
                 PerishableProduct pp = (PerishableProduct) p;
@@ -64,7 +64,7 @@ public class Inventory {
 
                 String[] data = line.split(",");
 
-                if(data.length == 6){
+                if(data.length == 5){
                     String id = data[0].trim();
                     String name = data[1].trim();
                     double price = Double.parseDouble(data[2].trim());
@@ -73,7 +73,7 @@ public class Inventory {
 
                     products.add(new PerishableProduct(id, name, price, quantity, expiryDate));
                 }
-                else if(data.length == 5){
+                else if(data.length == 4){
                     String id = data[0].trim();
                     String name = data[1].trim();
                     double price = Double.parseDouble(data[2].trim());
@@ -150,16 +150,19 @@ public class Inventory {
 
     public void orderLowStockItems(){
         boolean ordered = false;
-        int count = 0;
         for(Product p : products){
             if(p.getQuantity() < 5 ){
                 Order autoOrder = new Order("AUTO-" + p.getId(), p.getName(),20);
                 autoOrder.saveOrderToFile();
-                System.out.println(p.getName() + " için sipariş dosyaya eklendi.");
+                p.updateStock(20);
+                System.out.println(p.getName() + " için sipariş eklendi ve stok +20 güncellendi.");
                 ordered = true;
             }
            if(!ordered){
                System.out.println("BİLGİ: Sipariş verilecek ürün bulunamadı.");
+           }
+           else{
+               saveToFile();
            }
         }
     }
