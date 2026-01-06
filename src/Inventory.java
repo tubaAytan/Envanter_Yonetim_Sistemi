@@ -34,7 +34,7 @@ public class Inventory {
 
     public void saveToFile(){
         String fileName = "inventory.csv";
-        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))){
+        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName, false))){
         for(Product p: products){
             if(p instanceof PerishableProduct){
                 PerishableProduct pp = (PerishableProduct) p;
@@ -131,6 +131,7 @@ public class Inventory {
         for(Product p: products){
             if(p.getQuantity()<threshold){
                 System.out.println("UYARI: "+p.getName()+" ~ Kalan Stok: "+p.getQuantity());
+                alert =  true;
             }
         }
         if(!alert){
@@ -145,6 +146,22 @@ public class Inventory {
             }
         }
         return null;
+    }
+
+    public void orderLowStockItems(){
+        boolean ordered = false;
+        int count = 0;
+        for(Product p : products){
+            if(p.getQuantity() < 5 ){
+                Order autoOrder = new Order("AUTO-" + p.getId(), p.getName(),20);
+                autoOrder.saveOrderToFile();
+                System.out.println(p.getName() + " için sipariş dosyaya eklendi.");
+                ordered = true;
+            }
+           if(!ordered){
+               System.out.println("BİLGİ: Sipariş verilecek ürün bulunamadı.");
+           }
+        }
     }
 }
 

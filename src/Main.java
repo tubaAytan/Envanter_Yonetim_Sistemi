@@ -20,6 +20,7 @@ public class Main {
             System.out.println("6. Stok Güncelleme");
             System.out.println("7. Yeni Tedarikçi Bilgisi Ekle");
             System.out.println("8. Tüm Tedarikçileri Listele");
+            System.out.println("9. Sipariş Oluşturma");
             System.out.println("0. Çıkış");
             System.out.print("Seçiminiz: ");
 
@@ -91,6 +92,20 @@ public class Main {
                     break;
                 case 5:
                     inventory.checkLowStock(5);
+                    System.out.print("\nAzalan ürünler için otomatik sipariş oluşturulsun mu? (E/H): ");
+                    String oChoice = scanner.nextLine();
+                    if(oChoice.equalsIgnoreCase("E")){
+                        System.out.println("Sipariş işlemi başlatılıyor...");
+                        inventory.orderLowStockItems();
+                        System.out.println("İşlem tamamlandı. Ana menüye dönülüyor.");
+                    }
+
+                    else if(oChoice.equalsIgnoreCase("H")){
+                        System.out.println("İşlem iptal edildi.");
+                    }
+                    else{
+                        System.out.println("HATA: Yanlış bilgi girişi('" + choice + "')! İşleminiz sıfırlandı.");
+                    }
                     break;
                 case 6:
                     inventory.listProducts();
@@ -154,7 +169,35 @@ public class Main {
                     System.out.println("\n~~~~ Mevcut Tedarikçi Listesi ~~~~");
                     suppliers.listSuppliers();
                     break;
+                case 9:
+                    System.out.println("\n~~~~ Sipariş Paneli ~~~~");
+                    System.out.print("Sipariş verilecek ürünün adı: ");
+                    String orderProductName = scanner.nextLine();
+                    if(orderProductName.trim().isEmpty()){
+                        System.out.println("HATA: Ürün Adı boş bırakılamaz!");
+                        break;
+                    }
+                    int orderAmount = 0;
+                    try{
+                        System.out.print("Sipariş miktarı (Adet): ");
+                        orderAmount = Integer.parseInt(scanner.nextLine());
+                        if(orderAmount <= 0){
+                            System.out.println("HATA: Sipariş miktarı 0'dan büyük olmalıdır!");
+                            break;
+                        }
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("HATA: Lütfen miktar için geçerli bir sayı giriniz!");
+                        break;
+                    }
+                    String timestamp = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd-HHmm"));
+                    String oId = "ORD-" + timestamp;
+                    Order manualOrder = new Order(oId, orderProductName, orderAmount);
+                    manualOrder.saveOrderToFile();
 
+                    System.out.println("\nSİPARİŞİNİZ ONAYLANDI");
+                    manualOrder.displayOrderInfo();
+                    break;
                 case 0:
                     System.out.println("Sistemden Çıkılıyor...");
                     break;
