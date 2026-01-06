@@ -166,5 +166,9 @@ public class Inventory {
            }
         }
     }
+
+    public List<Product> getProducts(){
+        return this.products;
+    }
 }
 
