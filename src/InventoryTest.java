@@ -65,8 +65,8 @@ public class InventoryTest {
     @Test
     public void testDuplicateProductId() {
         inventory.addProduct(new Product("X1", "Ürün 1", 5.0, 10));
-        inventory.addProduct(new Product("X1", "Ürün 2", 15.0, 20));
-        assertEquals("Listede hala ürünler olmalı", 2, inventory.getProductById("X1") != null ? 1 : 0);
+        inventory.addProduct(new Product("X1", "Ürün 2", 15.0, 20)); // Bu eklenmeyecek
+        assertEquals("Aynı ID'li ürün eklenmemeliydi", 1, inventory.getProductCount());
     }
 
     @Test

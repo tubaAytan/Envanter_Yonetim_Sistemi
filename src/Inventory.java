@@ -14,10 +14,14 @@ public class Inventory {
         this.products = new ArrayList<>();
     }
     public void addProduct(Product product){
-        products.add(product);
-        saveToFile();
-        System.out.println(product.getName() + " envantere başarıyla eklendi.");
-
+        if(getProductById(product.getId()) != null) {
+            System.out.println("HATA: " + product.getId() + " ID'li ürün zaten mevcut! Ekleme reddedildi.");
+        }
+        else{
+            products.add(product);
+            saveToFile();
+            System.out.println(product.getName() + " envantere başarıyla eklendi.");
+        }
     }
     public void listProducts(){
         if(products.isEmpty()){
@@ -166,9 +170,8 @@ public class Inventory {
            }
         }
     }
-
-    public List<Product> getProducts(){
-        return this.products;
+    public int getProductCount() {
+        return products.size();
     }
 }
 
