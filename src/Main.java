@@ -21,6 +21,7 @@ public class Main {
             System.out.println("7. Yeni Tedarikçi Bilgisi Ekle");
             System.out.println("8. Tüm Tedarikçileri Listele");
             System.out.println("9. Sipariş Oluşturma");
+            System.out.println("10.Tüm Siparişler");
             System.out.println("0. Çıkış");
             System.out.print("Seçiminiz: ");
 
@@ -197,6 +198,9 @@ public class Main {
 
                     System.out.println("\nSİPARİŞİNİZ ONAYLANDI");
                     manualOrder.displayOrderInfo();
+                    break;
+                case 10:
+                    Order.listAllOrders();
                     break;
                 case 0:
                     System.out.println("Sistemden Çıkılıyor...");
